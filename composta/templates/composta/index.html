@@ -2,9 +2,228 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Composta - PAEC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composta Escolar y Casera | Proyecto PAEC</title>
+    {% load static %} <!-- Esta línea es clave para cargar archivos estáticos en Django -->
+    <style>
+        :root {
+            --verde-oscuro: #2d5a27;
+            --verde-medio: #4a8c3f;
+            --verde-claro: #e8f3e6;
+            --tierra: #6b4423;
+            --fondo: #f9faf8;
+            --texto: #2b2b2b;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fondo);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-medio));
+            color: white;
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+        header h1 {
+            font-size: 2.3rem;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        nav {
+            background-color: var(--tierra);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding: 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* Para que el menú flote sobre el contenido */
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        h2 {
+            color: var(--verde-oscuro);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--verde-claro);
+            padding-bottom: 0.4rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        /* NUEVOS ESTILOS PARA LA GALERÍA */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .galeria-grid img {
+            width: 100%;
+            height: 200px; /* Altura fija para uniformidad */
+            object-fit: cover; /* Recorta la imagen para que no se deforme */
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .galeria-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        /* FIN ESTILOS GALERÍA */
+        .card-si {
+            background-color: var(--verde-claro);
+            border-left: 5px solid var(--verde-medio);
+            padding: 1.2rem;
+            border-radius: 6px;
+        }
+        .card-no {
+            background-color: #fdecea;
+            border-left: 5px solid #c62828;
+            padding: 1.2rem;
+            border-radius: 6px;
+        }
+        .card-si h3 { color: var(--verde-oscuro); margin-bottom: 0.6rem; }
+        .card-no h3 { color: #b71c1c; margin-bottom: 0.6rem; }
+        ul, ol {
+            padding-left: 1.4rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .pasos li {
+            margin-bottom: 0.9rem;
+        }
+        .pasos strong {
+            color: var(--tierra);
+        }
+        footer {
+            background-color: var(--verde-oscuro);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Proyecto Composta - Estructura lista</h1>
+
+    <header>
+        <h1>Transforma tus Residuos en Vida: Guía de Composta</h1>
+        <p>Proyecto Aula, Escuela y Comunidad (PAEC) — Aprende a reducir la basura orgánica y producir abono natural de alta calidad desde tu casa o escuela.</p>
+    </header>
+
+    <nav>
+        <a href="#que-es">¿Qué es?</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#materiales">¿Qué sí y qué no?</a>
+        <a href="#galeria">Proceso Visual</a> <!-- Nuevo enlace al menú -->
+        <a href="#pasos">Paso a paso</a>
+    </nav>
+
+    <main>
+        <section id="que-es">
+            <h2>¿Qué es la composta?</h2>
+            <p>La composta es un abono orgánico natural que se obtiene mediante la descomposición controlada de restos vegetales y residuos de cocina gracias a la acción de microorganismos (bacterias y hongos), aire y humedad. Al final del proceso se convierte en tierra oscura, fértil y rica en nutrientes conocida como <strong>humus</strong>.</p>
+        </section>
+
+        <section id="beneficios">
+            <h2>Beneficios del compostaje</h2>
+            <ul>
+                <li><strong>Reduce la basura diaria:</strong> Hasta el 50% de los residuos que generamos en casa son orgánicos y pueden aprovecharse en lugar de ir al relleno sanitario.</li>
+                <li><strong>Nutre el suelo de forma natural:</strong> Mejora la retención de agua y aporta nutrientes esenciales sin necesidad de fertilizantes químicos.</li>
+                <li><strong>Disminuye gases de efecto invernadero:</strong> Evita que la materia orgánica se pudra sin oxígeno en basureros y genere gas metano.</li>
+                <li><strong>Ahorro económico:</strong> Produce tierra fértil gratuita para huertos escolares, jardines y macetas.</li>
+            </ul>
+        </section>
+
+        <section id="materiales">
+            <h2>¿Qué SÍ y qué NO lleva una composta?</h2>
+            <p>Para que no genere malos olores ni atraiga plagas, debe existir un equilibrio entre materiales húmedos (ricos en nitrógeno) y materiales secos (ricos en carbono):</p>
+            <div class="grid-2">
+                <div class="card-si">
+                    <h3>✔ Materiales Permitidos</h3>
+                    <ul>
+                        <li>Cáscaras y restos de frutas y verduras.</li>
+                        <li>Posos de café y bolsitas de té sin grapas.</li>
+                        <li>Cascarones de huevo triturados.</li>
+                        <li>Hojas secas, ramas pequeñas y aserrín natural.</li>
+                        <li>Cartón o papel sin tinta ni plásticos (en trozos).</li>
+                    </ul>
+                </div>
+                <div class="card-no">
+                    <h3>✘ Materiales Prohibidos</h3>
+                    <ul>
+                        <li>Carnes, huesos, pescados o mariscos.</li>
+                        <li>Lácteos (queso, leche, yogur) y grasas o aceites.</li>
+                        <li>Comida cocinada con sal o condimentos.</li>
+                        <li>Heces de mascotas (perros o gatos).</li>
+                        <li>Plásticos, metales, vidrio o colillas de cigarro.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN DE GALERÍA -->
+        <section id="galeria">
+            <h2>El Proceso PAEC en Imágenes</h2>
+            <div class="galeria-grid">
+                <img src="{% static 'composta/imagen_composta_1.jpg' %}" alt="Preparación de materiales para composta">
+                <img src="{% static 'composta/imagen_composta_2.jpg' %}" alt="Pila de composta en proceso con capas verdes y secas">
+                <img src="{% static 'composta/imagen_composta_3.jpg' %}" alt="Tierra finalizada y fértil de composta">
+            </div>
+        </section>
+
+        <section id="pasos">
+            <h2>¿Cómo hacer composta paso a paso?</h2>
+            <ol class="pasos">
+                <li><strong>Elige el lugar o contenedor:</strong> Usa una caja de madera, un bote perforado para que entre aire, o un espacio directo en la tierra con sombra parcial.</li>
+                <li><strong>Prepara la base seca:</strong> Coloca una primera capa de 10 cm de ramas secas, cartón picado u hojas secas para facilitar el drenaje y la ventilación.</li>
+                <li><strong>Alterna capas verdes y cafés:</strong> Agrega una capa de residuos húmedos (frutas/verduras) y cúbrela siempre con el doble de material seco (hojas secas o tierra).</li>
+                <li><strong>Controla la humedad y oxigena:</strong> Rocía un poco de agua si se ve muy seca (debe sentirse como una esponja exprimida) y revuélvela una vez por semana con una pala.</li>
+                <li><strong>Cosecha tu abono:</strong> Después de 2 a 3 meses, cuando la mezcla tenga olor a tierra de bosque, color café oscuro y no se distingan los restos originales, ya está lista para usarse en las plantas.</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <p>Proyecto PAEC — Equipo Composta | Desarrollado en Django</p>
+    </footer>
+
 </body>
 </html>
