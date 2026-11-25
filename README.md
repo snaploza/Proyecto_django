@@ -17,4 +17,4 @@ Cano Alexander
 1. Clonar el repositorio:
    bash
    git clone [https://github.com/snaploza/Proyecto_django.git](https://github.com/snaploza/Proyecto_django.git)
-   cd Proyecto_django
+   cd Proyecto_django 
